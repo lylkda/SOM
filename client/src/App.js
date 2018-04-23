@@ -10,7 +10,7 @@ import History from "./pages/History";
 import Signup from "./pages/Signup";
 import Login from "./pages/Signup/Login";
 import Landing from "./pages/Landing";
-// import Logout from "./components/Logout";
+import "./App.css";
 
 const App = () => (
   <Router>
