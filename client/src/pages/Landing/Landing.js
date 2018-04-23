@@ -45,12 +45,13 @@ class Landing extends Component {
                   <h1 className="cover-heading">Teachaid</h1>
                   <p className="lead">This application will provide conflict resolution for nominating students of the month.</p>
                   <p className="startButton"><a href="/login" className="btn btn-lg btn-warning">START</a></p>
+                  <p>Copyright © Teachaid</p>
                 </div>
-                <div className="mastfoot">
+                {/* <div className="mastfoot">
                   <div className="inner">
                     <p>Copyright © Teachaid</p>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

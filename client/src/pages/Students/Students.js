@@ -6,8 +6,6 @@ import {Container } from "../../components/Grid";
 import { Input, FormBtn, DropDownList } from "../../components/Form";
 import Monthly from "./award.json";
 
-
-
 //this will display the award depending on the month
 let holder = new Date();
 let elm1 = holder.getMonth();
