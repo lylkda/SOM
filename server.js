@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes");
@@ -9,8 +10,16 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Serve up static assets
-app.use(express.static("client/build"));
-// Add routes, both API and view
+app.use(express.static("client/build")); 
+
+app.use(passport.initialize());
+
+passport.use('local-login', require('./passport/local-login'));
+passport.use('local-signup', require('./passport/local-signup'));
+
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+
 app.use(routes);
 
 // Set up promises with mongoose

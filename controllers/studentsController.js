@@ -7,7 +7,12 @@ module.exports = {
       .find(req.query)
       .sort({ date: 1 })
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .catch(err => {console.log(err);res.status(422).json(err);});
+  },
+  findByTeacher: function(req, res) {
+    db.Student.find({teacher: req.user._id})
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
     db.Student
@@ -16,8 +21,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    let student = req.body;
+    student.teacher = req.user._id;
     db.Student
-      .create(req.body)
+      .create(student)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

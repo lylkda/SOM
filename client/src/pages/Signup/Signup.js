@@ -36,7 +36,7 @@ class Signup extends Component {
         // hard redirect to / to reload all the state and nav
         window.location.href = "/nominated";
       })
-      .catch(err => this.setState({ errorMessage: err.response.data.message }));
+      .catch(err => {this.setState({ errorMessage: err.response.data.message })});
   };
 
   signUp = () => {
@@ -55,7 +55,8 @@ class Signup extends Component {
         // authenticate the user after successful sign up
         this.authenticate();
       })
-      .catch(err => this.setState({ errorMessage: err.response.data.message }));
+      .catch(err => {console.log("--------------------------------", err.response.data);
+      this.setState({ errorMessage: err.response.data.message })});
   };
 
   handleInputChange = event => {
@@ -86,6 +87,7 @@ class Signup extends Component {
               <div className="col-md-3" />
               <div className="col-md-6">
                 <div className="col align-self-center box">
+                <div> {this.state.errorMessage} </div>
                   <form>
                     <div className="form-group">
                       <p className="loginButton"><a href="/login" className="btn btn-info">Login</a></p>
@@ -136,7 +138,7 @@ class Signup extends Component {
                       onChange:this.handleInputChange,
                       name:"password",
                       type:"password",
-                      placeholder:"Password (required)",
+                      placeholder:"Password (at least 6 char)",
                       className:"form-control",
                       minlength:8,
                       required:true}}

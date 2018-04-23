@@ -1,6 +1,11 @@
 import axios from "axios";
+import Auth from './Auth';
 
+axios.defaults.headers.common['Authorization'] = `bearer ${Auth.getToken()}`;
 export default {
+  getMyStudents: function() {
+    return axios.get('/api/students/mystudents');
+  }, 
   // Gets all students
   getStudents: function() {
     return axios.get("/api/students");

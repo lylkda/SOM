@@ -19,9 +19,11 @@ class History extends Component {
   }
 
   loadStudents = () => {
-    API.getStudents()
-      .then(res =>
+    API.getMyStudents()
+      .then(res =>{
+        console.log('getmystudent',res); 
         this.setState({ students: res.data, g6Student: "", g7Student: "", g8Student: "", teacher: "", characterCounts: "" })
+      }
       )
       .catch(err => console.log(err));
   };
@@ -40,7 +42,7 @@ class History extends Component {
         <div className="card-div" style={{ color: "black" }}>
         
         {/* filter out only me to see my entire */}
-        {this.state.students.filter(student => student.teacher.toLowerCase() === "ly").map(student => (
+        {this.state.students.map(student => (
           <Card
             g6={student.g6Student}
             g7={student.g7Student}

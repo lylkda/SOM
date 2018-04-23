@@ -3,7 +3,7 @@ import Auth from '../../utils/Auth';
 import { BrowserRouter as Route, Redirect, Link } from "react-router-dom";
 import API from "../../utils/API";
 import {Container } from "../../components/Grid";
-import { Input, FormBtn } from "../../components/Form";
+import { Input, FormBtn, DropDownList } from "../../components/Form";
 import Monthly from "./award.json";
 
 
@@ -21,19 +21,19 @@ class Students extends Component {
     g6Student: "",
     g7Student: "",
     g8Student: "",
-    teacher: "",
-    characterCounts: ""
+    characterCounts: "",
+    state: ""
   };
 
   handleFormSubmit = (event, data) => {
     event.preventDefault();
-    if (this.state.g6Student || this.state.teacher) {
+    if (this.state.g6Student && this.state.g7Student && this.state.g8Student && this.state.characterCounts && this.state.grade) {
       API.saveStudent({
         g6Student: this.state.g6Student,
         g7Student: this.state.g7Student,
         g8Student: this.state.g8Student,
-        teacher: this.state.teacher,
-        characterCounts: this.state.characterCounts
+        characterCounts: this.state.characterCounts,
+        grade: this.state.grade
       })
         .then(res => this.loadStudents(), alert("Nomination complete!"), window.location.href = "nominated")
         .catch(err => console.log(err));
@@ -100,18 +100,18 @@ class Students extends Component {
                   }}
                   label={`${month}: `}
                 />
-                <Input
+                <DropDownList
                   inputProps={{
-                    value: this.state.teacher,
+                    value: this.state.grade,
                     onChange: this.handleInputChange,
-                    name: "teacher",
-                    placeholder: "Teacher Name"
-                  }}
-                  label="Teacher: "
+                    name: "grade"
+                    }}
+                  values={[{ label: "6th Grade", value: 6 }, {label: "7th Grade", value: 7}, {label: "8th Grade", value: 8}]}
+                  label="Grade: "
                 />
                 <div className="btn-div">
                <FormBtn
-                    disabled={!(this.state.teacher || this.state.g6Student)}
+                    disabled={!(this.state.g7Student || this.state.g6Student || this.state.g8Student || this.state.characterCounts)}
                     onClick={this.handleFormSubmit}
                   >
                     Submit Student

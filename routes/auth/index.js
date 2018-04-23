@@ -1,8 +1,6 @@
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
-require('../../passport/local-signup')(passport);
-require('../../passport/local-login')(passport);
 const router = require("express").Router();
 
 /**
@@ -41,7 +39,7 @@ function validateSignupForm(payload) {
 
 
   if (!isFormValid) {
-    message = 'Check the form for errors.';
+    message = "Error";
   }
 
   return {
@@ -97,18 +95,19 @@ router.post('/signup', (req, res, next) => {
 
   return passport.authenticate('local-signup', (err) => {
     if (err) {
-      console.log(err);
-      if (err.name === 'MongoError' && err.code === 11000) {
+      console.log("err", err);
+      if (err.code === 11000) {
         // the 11000 Mongo code is for a duplication email error
         // the 409 HTTP status code is for conflict error
         return res.status(409).json({
           success: false,
-          message: 'Check the form for errors.',
+          message: 'This email is already taken.',
           errors: {
             email: 'This email is already taken.'
           }
         });
       }
+      
 
       return res.status(400).json({
         success: false,
@@ -145,10 +144,11 @@ router.post('/login', (req, res, next) => {
 
       return res.status(400).json({
         success: false,
-        message: 'Could not process the form.'
+        message: err.message
       });
     }
 
+    console.log('index.js/login', token, userData);
 
     return res.json({
       success: true,
@@ -158,5 +158,7 @@ router.post('/login', (req, res, next) => {
     });
   })(req, res, next);
 });
+
+
 
 module.exports = router;
