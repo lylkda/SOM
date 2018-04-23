@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Auth from '../../utils/Auth';
-import { BrowserRouter as Route, Redirect, Link } from "react-router-dom";
+import { BrowserRouter as Redirect } from "react-router-dom";
 import API from "../../utils/API";
 import {Container } from "../../components/Grid";
 import { Input, FormBtn, DropDownList } from "../../components/Form";
