@@ -78,7 +78,7 @@ class Nominated extends Component {
                 g8={student.g8Student}
                 cc={student.characterCounts} 
                 title={student.teacher}>
-                    <DeleteBtn onClick={() => this.deleteStudent(student._id)} />
+                <DeleteBtn onClick={() => this.deleteStudent(student._id)} />
                 </Card>
             ))}
           </div>

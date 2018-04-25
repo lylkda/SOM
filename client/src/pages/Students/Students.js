@@ -11,7 +11,6 @@ let holder = new Date();
 let elm1 = holder.getMonth();
 let elm2 = Object.entries(Monthly)[elm1];
 let month = elm2[1];
-console.log(month);
 
 class Students extends Component {
   state = {

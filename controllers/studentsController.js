@@ -10,7 +10,7 @@ module.exports = {
       .catch(err => {console.log(err);res.status(422).json(err);});
   },
   findByTeacher: function(req, res) {
-    db.Student.find({teacher: req.user._id})
+    db.Student.find({teacher: req.user.lastName})
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },
@@ -22,7 +22,7 @@ module.exports = {
   },
   create: function(req, res) {
     let student = req.body;
-    student.teacher = req.user._id;
+    student.teacher = req.user.lastName;
     db.Student
       .create(student)
       .then(dbModel => res.json(dbModel))
