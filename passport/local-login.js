@@ -22,7 +22,6 @@ module.exports = new PassportLocalStrategy({
 
   // find a user by email address
   return db.User.findOne({ email: userData.email }, (err, user) => {
-    console.log('findone-err', err);
     if (err) { return done(err); }
 
     if (!user) {
@@ -42,8 +41,6 @@ module.exports = new PassportLocalStrategy({
 
         return done(error);
       }
-
-      console.log('user', user);
 
       const payload = {
         sub: user._id
