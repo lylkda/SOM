@@ -21,7 +21,6 @@ class History extends Component {
   loadStudents = () => {
     API.getMyStudents()
       .then(res =>{
-        console.log('getmystudent',res); 
         this.setState({ students: res.data, g6Student: "", g7Student: "", g8Student: "", teacher: "", characterCounts: "" })
       }
       )
@@ -41,7 +40,6 @@ class History extends Component {
         </div>
         <div className="card-div" style={{ color: "black" }}>
         
-        {/* filter out only me to see my entire */}
         {this.state.students.map(student => (
           <Card
             g6={student.g6Student}
