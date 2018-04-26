@@ -34,10 +34,6 @@ const Nav = () => (
           <a className="dropdown-item" href="/history">
             History
           </a>
-          <div className="dropdown-divider" />
-          <a className="dropdown-item" href="/">
-            Donate
-          </a>
         </div>
       </li>
     </ul>
