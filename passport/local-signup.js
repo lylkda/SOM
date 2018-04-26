@@ -17,11 +17,6 @@ module.exports = new PassportLocalStrategy({
       lastName: req.body.lastName.trim()
     };
 
-    // db.User
-    //   .create(userData)
-    //   .then(dbModel => done(null))
-    //   .catch(err => done(err));
-
     const newUser = new db.User(userData);
     newUser.save((err) => {
       if (err) { return done(err); }
