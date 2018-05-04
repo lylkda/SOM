@@ -24,16 +24,32 @@ class Students extends Component {
 
   handleFormSubmit = (event, data) => {
     event.preventDefault();
-    if (this.state.g6Student && this.state.g7Student && this.state.g8Student && this.state.characterCounts && this.state.grade) {
-      API.saveStudent({
-        g6Student: this.state.g6Student,
-        g7Student: this.state.g7Student,
-        g8Student: this.state.g8Student,
-        characterCounts: this.state.characterCounts,
-        grade: this.state.grade
-      })
+    if (this.state.characterCounts && this.state.grade) {
+      if (!this.state.g6Student&&!this.state.g7Student){
+        API.saveStudent({
+          g6Student: "N/A",
+          g7Student: "N/A",
+          g8Student: this.state.g8Student,
+          characterCounts: this.state.characterCounts,
+          grade: this.state.grade
+        })
         .then(res => this.loadStudents(), alert("Nomination complete!"), window.location.href = "nominated")
         .catch(err => console.log(err));
+      }
+      else{
+        API.saveStudent({
+          g6Student: this.state.g6Student,
+          g7Student: this.state.g7Student,
+          g8Student: this.state.g8Student,
+          characterCounts: this.state.characterCounts,
+          grade: this.state.grade
+        })
+          .then(res => this.loadStudents(), alert("Nomination complete!"), window.location.href = "nominated")
+          .catch(err => console.log(err));
+      }
+    }
+    if (!this.state.characterCounts){
+      alert("Please nominate a student for Character Counts");
     }
   };
 
@@ -103,7 +119,7 @@ class Students extends Component {
                     onChange: this.handleInputChange,
                     name: "grade"
                     }}
-                  values={[{ label: "6th Grade", value: 6 }, {label: "7th Grade", value: 7}, {label: "8th Grade", value: 8}]}
+                  values={[{label: "Please Select a Grade Level", value: false}, { label: "6th Grade", value: 6 }, {label: "7th Grade", value: 7}, {label: "8th Grade", value: 8}]}
                   label="Grade: "
                 />
                 <div className="btn-div">
